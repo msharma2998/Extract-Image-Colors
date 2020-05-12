@@ -21,6 +21,10 @@
         "default_popup": "./popup/popup.html"        
       },
       "author" : "Mansi Sharma",
+      "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+      },
       "content_scripts": 
       [
         {
