@@ -20,5 +20,13 @@
         "default_title": "Color Palette Extractor",   
         "default_popup": "./popup/popup.html"        
       },
-      "author" : "Mansi Sharma"
+      "author" : "Mansi Sharma",
+      "content_scripts": 
+      [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["content.js"]
+        }
+      ],
+      "permissions" : ["tabs"]
 }
