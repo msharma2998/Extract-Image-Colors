@@ -1,27 +1,22 @@
-
-chrome.runtime.onConnect.addListener(function(port)
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
-        // check if msg is from correct extension
-        if(port.name == "Extract Palette")
+    if (request.text == "Activate")
+    {
+        console.log("Are we done yet");
+        var imgs = document.getElementsByTagName("img");
+        for(var i = 0; i < imgs.length; ++i) 
         {
-            // add event listener to listen for messages
-            port.onMessage.addListener(function(msg){
-                // display user guide if asked to
-                if(msg.text == "Activate")
+            imgs[i].addEventListener("click", function() 
+            {
+                var source = this.src;
+                console.log(source);
+                chrome.runtime.sendMessage({imgsrc : source}, function(response) 
                 {
-                    console.log("Are we done yet");
-                    var imgs = document.getElementsByTagName("img");
-                    for(var i = 0; i < imgs.length; ++i) 
-                    {
-                        imgs[i].addEventListener("click", function() {
-                            var source = this.src;
-                            console.log(source);
-                            var port =chrome.runtime.connect({name : "From Content Script"});
-                            port.postMessage({imgsrc : source});
-                        });
-                    }
-                }
-                    
+                    console.log(response);
+                    sendResponse(response);
+                })
             })
         }
-})
+    }
+    return true;
+});

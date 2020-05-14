@@ -22,7 +22,7 @@
       },
       "author" : "Mansi Sharma",
       "background": {
-        "scripts": ["background.js"],
+        "scripts": ["background/jquery-3.5.1.js","background/background.js"],
         "persistent": false
       },
       "content_scripts": 
@@ -32,5 +32,6 @@
           "js": ["content.js"]
         }
       ],
+      "content_security_policy": "script-src 'self' 'sha256-T9XG3F+oZW3IIEb54MXz9Sgmx73NELSCQxndaWN9AI0='; object-src 'self'",
       "permissions" : ["tabs"]
 }
