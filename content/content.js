@@ -1,38 +1,38 @@
 function resultpopup(src)
 {
     mainDiv = document.createElement("div");
-    mainDiv.setAttribute("style","position: absolute; left: 0px; top: 0px; background-color: rgb(255, 255, 255); opacity: 0.5; z-index: 2000; height: 1083px; width: 100%;");
+    mainDiv.setAttribute("id","mainDiv");
     
     iframeElement = document.createElement("iframe");
-    iframeElement.setAttribute("style","width: 100%; height: 100%;");
+    iframeElement.setAttribute("id","iframeElement");
 
     mainDiv.appendChild(iframeElement);
 
     modalDialogParentDiv = document.createElement("div");
-    modalDialogParentDiv.setAttribute("style","position: absolute; width: 500px; border: none; background-color: rgb(255, 255, 255); z-index: 2001; overflow: auto; text-align: center; top: 149px; left: 450px;");
+    modalDialogParentDiv.setAttribute("id","modalDialogParentDiv");
 
     modalDialogHeaderDiv = document.createElement("div");
-    modalDialogHeaderDiv.setAttribute("style" , "background-color: red; width: 100%; height: 40px;");
+    modalDialogHeaderDiv.setAttribute("id" , "modalDialogHeaderDiv");
 
-    breakElement = document.createElement("hr"); 
-
+    breakElement = document.createElement("hr");
+    
     modalDialogImageDiv = document.createElement("div"); 
-    modalDialogImageDiv.setAttribute("style" , "margin: auto; margin-top:10px; margin-bottom:10px; background-color:white;border: 2px solid white;border-radius:25px; height: 350px;width:400px");
+    modalDialogImageDiv.setAttribute("id" , "modalDialogImageDiv");
     image = document.createElement("img");
     image.setAttribute("src",src);
-    image.setAttribute("style","height: 100%; width: 100%;border-radius:25px;");
+    image.setAttribute("id","image");
     modalDialogImageDiv.appendChild(image);
 
     modalDialogColorDiv = document.createElement("div");
-    modalDialogColorDiv.setAttribute("style","width:630px;height:200px; display:flex; margin:10px");
+    modalDialogColorDiv.setAttribute("id","modalDialogColorDiv");
     modalDialogDominantColorDiv = document.createElement("div");
-    modalDialogDominantColorDiv.setAttribute("style","height: 100%; width: 200px;");
+    modalDialogDominantColorDiv.setAttribute("id","modalDialogDominantColorDiv");
     DominantColorTitle =  document.createElement("h3");
     DominantColorTitle.innerHTML = "Dominant Color";
-    DominantColorTitle.setAttribute("style","text-align: left; margin-left:5px;");
+    DominantColorTitle.setAttribute("id","DominantColorTitle");
 
     DominantColorContainer = document.createElement("div");
-    DominantColorContainer.setAttribute("style","width: 50px;height: 80px;margin:10px;");
+    DominantColorContainer.setAttribute("id","DominantColorContainer");
     DominantColor = document.createElement("div");
     DominantColor.setAttribute("style","margin-top:30px;background-color: red;border: 1px solid red;border-radius: 50%;height: 50px;width: 50px;")
     DominantColorContainer.appendChild(DominantColor);
@@ -40,13 +40,13 @@ function resultpopup(src)
     modalDialogDominantColorDiv.appendChild(DominantColorContainer);
     
     modalDialogColorPaletteDiv = document.createElement("div");
-    modalDialogColorPaletteDiv.setAttribute("style","height: 100%; width: 430px ");
+    modalDialogColorPaletteDiv.setAttribute("id","modalDialogColorPaletteDiv");
     PaletteTitle =  document.createElement("h3");
     PaletteTitle.innerHTML = "Palette";
-    PaletteTitle.setAttribute("style","text-align: left; margin-left:5px;");
+    PaletteTitle.setAttribute("id","PaletteTitle");
     modalDialogColorPaletteDiv.appendChild(PaletteTitle);
     PaletteColorsDiv = document.createElement("div");
-    PaletteColorsDiv.setAttribute("style","height: 200px; width: 430px;margin:0;display: flex;flex-wrap: wrap;align-items: flex-start; ");
+    PaletteColorsDiv.setAttribute("id","PaletteColorsDiv");
     for(var i=0;i<10;i++)
     {
         PaletteContainer = document.createElement("div");
