@@ -13,32 +13,63 @@ function resultpopup(src)
 
     modalDialogHeaderDiv = document.createElement("div");
     modalDialogHeaderDiv.setAttribute("style" , "background-color: red; width: 100%; height: 40px;");
+
+    breakElement = document.createElement("hr"); 
+
     modalDialogImageDiv = document.createElement("div"); 
-    modalDialogImageDiv.setAttribute("style" , "margin: auto; margin-top:10px; margin-bottom:10px; background-color:white;border: 2px solid white;border-radius:25px; height: 400px;width:400px");
+    modalDialogImageDiv.setAttribute("style" , "margin: auto; margin-top:10px; margin-bottom:10px; background-color:white;border: 2px solid white;border-radius:25px; height: 350px;width:400px");
     image = document.createElement("img");
     image.setAttribute("src",src);
     image.setAttribute("style","height: 100%; width: 100%;border-radius:25px;");
     modalDialogImageDiv.appendChild(image);
-    /* 
-        modalDialogTextSpan = document.createElement("span"); 
-        modalDialogText = document.createElement("strong"); 
-        modalDialogText.innerHTML = "Processing...  Please Wait.";
-        breakElement = document.createElement("br"); 
-    */
 
-   modalDialogParentDiv.appendChild(modalDialogHeaderDiv);
-   modalDialogParentDiv.appendChild(modalDialogImageDiv);
+    modalDialogColorDiv = document.createElement("div");
+    modalDialogColorDiv.setAttribute("style","width:630px;height:200px; display:flex; margin:10px");
+    modalDialogDominantColorDiv = document.createElement("div");
+    modalDialogDominantColorDiv.setAttribute("style","height: 100%; width: 200px;");
+    DominantColorTitle =  document.createElement("h3");
+    DominantColorTitle.innerHTML = "Dominant Color";
+    DominantColorTitle.setAttribute("style","text-align: left; margin-left:5px;");
 
-    /*
-        modalDialogTextSpan.appendChild(modalDialogText);
-        modalDialogTextDiv.appendChild(modalDialogTextSpan);
-        modalDialogTextDiv.appendChild(breakElement);
-        modalDialogTextDiv.appendChild(breakElement);
-        modalDialogHeaderDiv.appendChild(modalDialogTextDiv);
-    */
-document.body.appendChild(mainDiv);
-document.body.appendChild(modalDialogParentDiv);
+    DominantColorContainer = document.createElement("div");
+    DominantColorContainer.setAttribute("style","width: 50px;height: 80px;margin:10px;");
+    DominantColor = document.createElement("div");
+    DominantColor.setAttribute("style","margin-top:30px;background-color: red;border: 1px solid red;border-radius: 50%;height: 50px;width: 50px;")
+    DominantColorContainer.appendChild(DominantColor);
+    modalDialogDominantColorDiv.appendChild(DominantColorTitle);
+    modalDialogDominantColorDiv.appendChild(DominantColorContainer);
+    
+    modalDialogColorPaletteDiv = document.createElement("div");
+    modalDialogColorPaletteDiv.setAttribute("style","height: 100%; width: 430px ");
+    PaletteTitle =  document.createElement("h3");
+    PaletteTitle.innerHTML = "Palette";
+    PaletteTitle.setAttribute("style","text-align: left; margin-left:5px;");
+    modalDialogColorPaletteDiv.appendChild(PaletteTitle);
+    PaletteColorsDiv = document.createElement("div");
+    PaletteColorsDiv.setAttribute("style","height: 200px; width: 430px;margin:0;display: flex;flex-wrap: wrap;align-items: flex-start; ");
+    for(var i=0;i<10;i++)
+    {
+        PaletteContainer = document.createElement("div");
+        PaletteContainer.setAttribute("style","width: 50px;height: 80px;margin:4px;");
+        PaletteColors = document.createElement("div");
+        PaletteColors.setAttribute("style","background-color:red; border: 1px solid red;border-radius: 50%;height: 50px;width: 50px;")
+        PaletteContainer.appendChild(PaletteColors);
+        PaletteColorsDiv.appendChild(PaletteContainer);
+    }
+    
+    modalDialogColorPaletteDiv.appendChild(PaletteColorsDiv); 
+    modalDialogColorDiv.appendChild(modalDialogDominantColorDiv);
+    modalDialogColorDiv.appendChild(modalDialogColorPaletteDiv);
+
+    modalDialogParentDiv.appendChild(modalDialogHeaderDiv);
+    modalDialogParentDiv.appendChild(breakElement);
+    modalDialogParentDiv.appendChild(modalDialogImageDiv);
+    modalDialogParentDiv.appendChild(modalDialogColorDiv);
+    
+    document.body.appendChild(mainDiv);
+    document.body.appendChild(modalDialogParentDiv);
 }
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
     if (request.text == "Activate")
