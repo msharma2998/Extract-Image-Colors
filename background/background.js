@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
                 color : dominantColor,
                 paletteColors : paletteArray
             }
-            sendResponse({palette: paletteGenerator});           
+            sendResponse(paletteGenerator);           
         });
             
     });    
