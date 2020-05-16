@@ -1,4 +1,4 @@
-function resultpopup(src)
+function resultpopup(src,color,palette)
 {
     mainDiv = document.createElement("div");
     mainDiv.setAttribute("id","mainDiv");
@@ -34,8 +34,13 @@ function resultpopup(src)
     DominantColorContainer = document.createElement("div");
     DominantColorContainer.setAttribute("id","DominantColorContainer");
     DominantColor = document.createElement("div");
-    DominantColor.setAttribute("style","margin-top:30px;background-color: red;border: 1px solid red;border-radius: 50%;height: 50px;width: 50px;")
+    DominantColor.setAttribute("style","margin-top:30px;border: 0px solid white;border-radius: 50%;height: 50px;width: 50px;")
+    DominantColor.style.backgroundColor = color;
+    DominantColorName =  document.createElement("p");
+    DominantColorName.setAttribute("style","font-size:12px");
+    DominantColorName.innerHTML = color;
     DominantColorContainer.appendChild(DominantColor);
+    DominantColorContainer.appendChild(DominantColorName);
     modalDialogDominantColorDiv.appendChild(DominantColorTitle);
     modalDialogDominantColorDiv.appendChild(DominantColorContainer);
     
@@ -50,10 +55,15 @@ function resultpopup(src)
     for(var i=0;i<10;i++)
     {
         PaletteContainer = document.createElement("div");
-        PaletteContainer.setAttribute("style","width: 50px;height: 80px;margin:4px;");
+        PaletteContainer.setAttribute("style","width: 50px;height: 65px;margin:4px;");
         PaletteColors = document.createElement("div");
-        PaletteColors.setAttribute("style","background-color:red; border: 1px solid red;border-radius: 50%;height: 50px;width: 50px;")
+        PaletteColors.setAttribute("style","border: 0px solid white;border-radius: 50%;height: 50px;width: 50px;")
+        PaletteColors.style.backgroundColor = palette[i];
+        ColorName =  document.createElement("p");
+        ColorName.setAttribute("style","font-size:12px");
+        ColorName.innerHTML = palette[i];
         PaletteContainer.appendChild(PaletteColors);
+        PaletteContainer.appendChild(ColorName);
         PaletteColorsDiv.appendChild(PaletteContainer);
     }
     
@@ -90,13 +100,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
                 chrome.runtime.sendMessage({imgsrc : source}, function(response) 
                 {
                     console.log(response);
-                    resultpopup(response.imgsrc);
                     var hexarray=[];
+                    var hexdominantcolor = rgbToHex(response.color[0],response.color[1],response.color[2]);
                     for(var i=0;i<10;i++)
                     {
                         hexarray.push(rgbToHex(response.paletteColors[i][0],response.paletteColors[i][1],response.paletteColors[i][2]));
                     }
                     console.log(hexarray);
+                    resultpopup(response.imgsrc,hexdominantcolor,hexarray);
 // $('.close-div').on('click', function(){
 //     $(this).closest("#clients-edit-wrapper").remove();
 // });
