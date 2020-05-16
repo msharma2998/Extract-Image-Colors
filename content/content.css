@@ -3,8 +3,8 @@
     position: absolute; 
     left: 0px; 
     top: 0px; 
-    background-color: #808080; 
-    opacity: 0.5; 
+    background-color: #141712; 
+    opacity: 1; 
     z-index: 2000; 
     height: 1083px; 
     width: 100%;
@@ -17,53 +17,53 @@
 #modalDialogParentDiv
 {
     position: absolute; 
-    width: 650px;
-    height: 700px; 
+    width: 640px;
+    height: 717px; 
     border: none; 
     background-color: #f2f2f2; 
     z-index: 2001; 
     overflow: auto; 
-    text-align: center; 
-    top: 149px; 
-    left: 400px;
-}
-#modalDialogHeaderDiv
-{
-    background-color: red; 
-    width: 100%; 
-    height: 40px;
+    text-align: center;
+    font-family: "Gill Sans", sans-serif; 
+    top: 30px; 
+    left: 50%;
+    margin-left: -320px;
+    border-radius: 20px;
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 15px -10px 10px 1px rgb(255,255,255,0.4);
 }
 #modalDialogImageDiv
 {
-    margin: auto;
-    margin-top:10px; 
-    margin-bottom:10px; 
+    margin: 0;
     background-color:white;
     border: 0px solid white;
-    border-radius:25px; 
-    height: 350px; 
-    width:400px;
+    height: 423px; 
+    width:100%;
 }
 #image
 {
     height: 100%; 
     width: 100%;
-    border-radius:25px;
 }
 #modalDialogColorDiv
 {
-    width:610px;
-    height:240px; 
+    width:640px;
+    height:200px; 
     display:flex; 
-    margin:10px;
 }
 #modalDialogDominantColorDiv
 {
     height: 100%; 
-    width: 200px;
+    width: 190px;
+    margin-left: 10px;
 }
 #DominantColorTitle
 {
+    font-family: "Gill Sans", sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
     text-align: left; 
     margin-left:5px;
 }
@@ -76,29 +76,42 @@
 #modalDialogColorPaletteDiv
 {
     height: 100%; 
-    width: 430px;
+    width: 450px;
 }
 #PaletteTitle
 {
+    font-family: "Gill Sans", sans-serif;
+    font-size: 18px;
     text-align: left; 
     margin-left:5px;
+    text-transform: uppercase;
 }
 #PaletteColorsDiv
 {
-    height: 200px; 
-    width: 430px;
+    height: 142px; 
+    width: 450px;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start; 
 }
+#breakElement
+{
+    margin-top: 14px;
+    margin-bottom: 8px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
 #modalDialogQuestionDiv
 {
-    width:610px;
-    height:60px;
-    margin:10px;
+    width:640px;
+    height:70px
 }
-
+#Question
+{
+    font-family: "Gill Sans", sans-serif;
+    font-size: 20px;
+}
 #QuestionDiv
 {
     width: 400px;
@@ -108,3 +121,24 @@
     display: flex;
     justify-content: space-evenly;
 }
+.Button
+{
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    border-radius: 20px;
+    color: #FFFFFF;
+    background-color:#726EE8;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 700;
+	transition: all 0.5s;
+	outline: none;
+}
+
+.Button:hover
+{
+    background-color:#272394 ;
+} 

@@ -10,12 +10,7 @@ function resultpopup(src,color,palette)
 
     modalDialogParentDiv = document.createElement("div");
     modalDialogParentDiv.setAttribute("id","modalDialogParentDiv");
-
-    modalDialogHeaderDiv = document.createElement("div");
-    modalDialogHeaderDiv.setAttribute("id" , "modalDialogHeaderDiv");
-
-    breakElement = document.createElement("hr");
-    
+   
     modalDialogImageDiv = document.createElement("div"); 
     modalDialogImageDiv.setAttribute("id" , "modalDialogImageDiv");
     image = document.createElement("img");
@@ -37,7 +32,7 @@ function resultpopup(src,color,palette)
     DominantColor.setAttribute("style","margin-top:30px;border: 0px solid white;border-radius: 50%;height: 50px;width: 50px;")
     DominantColor.style.backgroundColor = color;
     DominantColorName =  document.createElement("p");
-    DominantColorName.setAttribute("style","font-size:12px");
+    DominantColorName.setAttribute("style","font-size:12px; font-weight:700;");
     DominantColorName.innerHTML = color;
     DominantColorContainer.appendChild(DominantColor);
     DominantColorContainer.appendChild(DominantColorName);
@@ -55,12 +50,12 @@ function resultpopup(src,color,palette)
     for(var i=0;i<10;i++)
     {
         PaletteContainer = document.createElement("div");
-        PaletteContainer.setAttribute("style","width: 50px;height: 65px;margin:4px;");
+        PaletteContainer.setAttribute("style","width: 45px;height: 65px;margin:4px;");
         PaletteColors = document.createElement("div");
-        PaletteColors.setAttribute("style","border: 0px solid white;border-radius: 50%;height: 50px;width: 50px;")
+        PaletteColors.setAttribute("style","border: 0px solid white;border-radius: 50%;height: 45px;width: 45px;")
         PaletteColors.style.backgroundColor = palette[i];
         ColorName =  document.createElement("p");
-        ColorName.setAttribute("style","font-size:12px");
+        ColorName.setAttribute("style","font-size:11px;font-weight:700; margin-top:5px; margin-bottom:5px");
         ColorName.innerHTML = palette[i];
         PaletteContainer.appendChild(PaletteColors);
         PaletteContainer.appendChild(ColorName);
@@ -70,6 +65,9 @@ function resultpopup(src,color,palette)
     modalDialogColorPaletteDiv.appendChild(PaletteColorsDiv); 
     modalDialogColorDiv.appendChild(modalDialogDominantColorDiv);
     modalDialogColorDiv.appendChild(modalDialogColorPaletteDiv);
+
+    breakElement = document.createElement("hr");
+    breakElement.setAttribute("id","breakElement");
 
     modalDialogQuestionDiv = document.createElement("div");
     modalDialogQuestionDiv.setAttribute("id","modalDialogQuestionDiv");
@@ -89,10 +87,9 @@ function resultpopup(src,color,palette)
     modalDialogQuestionDiv.appendChild(Question);
     modalDialogQuestionDiv.appendChild(QuestionDiv);
 
-    modalDialogParentDiv.appendChild(modalDialogHeaderDiv);
-    modalDialogParentDiv.appendChild(breakElement);
     modalDialogParentDiv.appendChild(modalDialogImageDiv);
     modalDialogParentDiv.appendChild(modalDialogColorDiv);
+    modalDialogParentDiv.appendChild(breakElement);
     modalDialogParentDiv.appendChild(modalDialogQuestionDiv);
     
     document.body.appendChild(mainDiv);
