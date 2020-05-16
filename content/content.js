@@ -70,6 +70,11 @@ function resultpopup(src)
     document.body.appendChild(modalDialogParentDiv);
 }
 
+function rgbToHex(r, g, b) 
+{
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
     if (request.text == "Activate")
@@ -86,7 +91,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
                 {
                     console.log(response);
                     resultpopup(response.imgsrc);
-                    
+                    var hexarray=[];
+                    for(var i=0;i<10;i++)
+                    {
+                        hexarray.push(rgbToHex(response.paletteColors[i][0],response.paletteColors[i][1],response.paletteColors[i][2]));
+                    }
+                    console.log(hexarray);
 // $('.close-div').on('click', function(){
 //     $(this).closest("#clients-edit-wrapper").remove();
 // });
