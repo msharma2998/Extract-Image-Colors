@@ -14,20 +14,18 @@ function handler()
 }
 chrome.storage.local.get('userColors',function(result)
    {
+    var colorBody = document.getElementById("colorBody");
     if(result.userColors == undefined)
     {
-       var colorBody = document.getElementById("colorBody");
        var image = document.createElement("img");
        image.setAttribute("src","/icons/popup-image.png");
        image.setAttribute("id","colorimg");
-       image.setAttribute("style","height:100px; width: 120px; margin-left:140px;");
        var text = document.createElement("h3");
        text.innerHTML = "OOPS! Nothing to show. Try saving some colors!";
-       text.setAttribute("style","text-align: center;");
        text.setAttribute("id","text");
        colorBody.appendChild(image);
        colorBody.appendChild(text);
-       window.onload = handler;
+       handler();
     
     }   
     else
@@ -40,7 +38,40 @@ chrome.storage.local.get('userColors',function(result)
             text.parentNode.removeChild(text);
 
         }
-        window.onload = handler;
+        var container = document.createElement("div");
+        container.setAttribute("id","container");
+        var userColors= result.userColors;
+        var len = userColors.length;
+        if(len < 11)
+        {
+            for(var i=0;i<len;i++)
+            {
+                color = document.createElement("div");
+                color.setAttribute("style","color")
+                color.style.backgroundColor = userColors[i];
+                container.appendChild(color);
+            }
+        }
+        else
+        {
+            for(var i=len-1;i >= len-11;i--)
+            {
+                color = document.createElement("div");
+                color.setAttribute("class","color")
+                color.style.backgroundColor = userColors[i];
+                container.appendChild(color);
+            }
+        }
+        var buttondiv = document.createElement("div");
+        buttondiv.setAttribute("id","buttondiv")
+        var button= document.createElement("button");
+        button.setAttribute("id","button");
+        button.innerHTML="View All";
+        buttondiv.appendChild(button);
+        colorBody.appendChild(container);
+        colorBody.appendChild(buttondiv);
+
+        handler();
     }
    });
 
