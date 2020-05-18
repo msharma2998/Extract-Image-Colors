@@ -1,0 +1,72 @@
+body
+{
+    height: 250px;
+    width: 400px; 
+    margin: 0;
+}
+
+#header
+{
+    height:80px; 
+    width: 400px;
+    display: flex; 
+    justify-content: space-evenly;
+    background: #1F1C2C;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #928DAB, #1F1C2C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+}
+
+#click 
+{
+    height: 35px; 
+    margin-top:30px; 
+    padding: 10px; 
+    border-radius: 10px; 
+    border:none;color: white; 
+    background-color: #28a745;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    animation:click 5s infinite linear; 
+    position: relative;
+}
+
+@keyframes click
+{
+    0%
+    {
+        top: 0em;
+    }
+    40%
+    {
+        top: 0em;
+    }
+    43%
+    {
+        top: -0.9em;
+    }
+    46%
+    {
+        top: 0em;
+    }
+    48%
+    {
+        top: -0.4em;
+    }
+    50%
+    {
+        top: 0em;
+    }
+    100%
+    {
+        top: 0em;
+    }
+}
+
+#h3
+{
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 18px;
+    text-align: left;
+    margin:10px; 
+    text-transform: uppercase; 
+    color: steelblue;
+}

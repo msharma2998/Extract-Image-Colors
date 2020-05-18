@@ -1,4 +1,17 @@
 window.paletteGenerator = {};
+chrome.runtime.onInstalled.addListener(function() 
+{
+   chrome.storage.local.clear();
+   chrome.storage.local.get('userColors',function(result)
+   {
+    if(result.userColors == undefined)
+    {
+        console.log("Empty");
+        chrome.storage.local.clear();
+    }   
+   });
+ 
+})
 function rgbToHex(r, g, b) 
 {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
@@ -34,7 +47,14 @@ chrome.runtime.onConnect.addListener(function(port) {
                         if(msg.doWeStore == "Yes")
                         {
                             chrome.storage.local.get('userColors', function (result) {
-                                var updateColors = result.userColors;
+                                if(result.userColors == undefined)
+                                {
+                                    var updateColors = [];
+                                }
+                                else
+                                {
+                                    var updateColors = result.userColors;
+                                }
                                 for(var i=0;i<10;i++)
                                 {
                                     updateColors.push(rgbToHex(paletteArray[i][0],paletteArray[i][1],paletteArray[i][2]));

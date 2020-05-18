@@ -2,19 +2,18 @@
 <html>
     <head>
         <title>Color-Extractor</title>
+        <link rel="stylesheet" href="./popup.css">
         <script type="text/javascript" src="../lib/jquery-3.5.1.js"></script>
         <script type="text/javascript" src ="./popup.js"></script>
     </head>
-    <body style="height: 200px; width: 200px;"> 
-        <button id="click">Click to start generating palettes!</button>   
-        <div>
-            <div style="height: 100px; width: 100px;"><img src=""></div>
-            <div>
-                <div>
-                    <p>Dominant Colors</p>
-                    <div id="dominant"></div>
-                </div>
-            </div>
-        </div>   
+    <body> 
+        <div id="header">
+            <img src= "/icons/color-palette-icon-80.png" style="width: 80px;height: 70px; margin: 5px;">
+            <button id="click">Click to start generating palettes!</button>   
+        </div>
+        <div id="colorBody">
+            <h3 id="h3">Color Gallery</h3>
+        </div>
+         
     </body>
 </html>
