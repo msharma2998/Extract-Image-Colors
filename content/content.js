@@ -78,8 +78,10 @@ function resultpopup(src,color,palette)
     QuestionDiv.setAttribute("id","QuestionDiv");
     ButtonYes = document.createElement("button");
     ButtonYes.setAttribute("class","Button");
+    ButtonYes.setAttribute("id","Yes");
     ButtonNo = document.createElement("button");
     ButtonNo.setAttribute("class","Button");
+    ButtonNo.setAttribute("id","No"); 
     ButtonYes.innerHTML = "YES";
     ButtonNo.innerHTML = "NO";
     QuestionDiv.appendChild(ButtonYes);
@@ -113,7 +115,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
             {
                 var source = this.src;
                 console.log(source);
-                chrome.runtime.sendMessage({imgsrc : source}, function(response) 
+                var port = chrome.runtime.connect({name: "Content"});
+                port.postMessage({imgsrc : source});
+                port.onMessage.addListener(function(response)
                 {
                     console.log(response);
                     var hexarray=[];
@@ -124,17 +128,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
                     }
                     console.log(hexarray);
                     resultpopup(response.imgsrc,hexdominantcolor,hexarray);
+                    $(document).on('click', '.Button', function() {
+                        var id = $(this).attr("id");
+                        port.postMessage({doWeStore : id});
+                        var div1 = document.getElementById('mainDiv');
+                        var div2 = document.getElementById('modalDialogParentDiv')
+                        div1.parentNode.removeChild(div1);
+                        div2.parentNode.removeChild(div2);
+                    });
                     sendResponse(response);
                 })
             })
         }
     }
     return true;
-});
-
-$(document).on('click', '.Button', function() {
-    var div1 = document.getElementById('mainDiv');
-    var div2 = document.getElementById('modalDialogParentDiv')
-    div1.parentNode.removeChild(div1);
-    div2.parentNode.removeChild(div2);
 });

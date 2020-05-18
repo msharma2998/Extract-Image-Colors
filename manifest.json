@@ -34,5 +34,5 @@
         }
       ],
       "content_security_policy": "script-src 'self' 'sha256-T9XG3F+oZW3IIEb54MXz9Sgmx73NELSCQxndaWN9AI0='; object-src 'self'",
-      "permissions" : ["tabs"]
+      "permissions" : ["tabs","storage","unlimitedStorage"]
 }
