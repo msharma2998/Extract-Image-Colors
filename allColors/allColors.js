@@ -25,7 +25,8 @@ chrome.storage.local.get("userColors",function(result)
         del.innerHTML = "Delete";
         container.appendChild(colors);
         container.appendChild(del);
-        document.body.appendChild(container);
+        var display = document.getElementById("display");
+        display.appendChild(container);
     }
     $(document).on('click','.delete',function()
     {
@@ -38,6 +39,8 @@ chrome.storage.local.get("userColors",function(result)
         var index = updateColors.indexOf(hex);
         console.log(index);
         updateColors.splice(index,1);
+        $(this).parent().remove();
+        // parent.style.opacity=0.5;
         chrome.storage.local.set({userColors : updateColors});
     })
 })
