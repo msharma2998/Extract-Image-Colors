@@ -44,10 +44,10 @@ chrome.storage.local.get('userColors',function(result)
         var len = userColors.length;
         if(len < 11)
         {
-            for(var i=0;i<len;i++)
+            for(var i=len-1;i>=0;i--)
             {
                 color = document.createElement("div");
-                color.setAttribute("style","color")
+                color.setAttribute("class","color")
                 color.style.backgroundColor = userColors[i];
                 container.appendChild(color);
             }
@@ -70,8 +70,9 @@ chrome.storage.local.get('userColors',function(result)
         buttondiv.appendChild(button);
         colorBody.appendChild(container);
         colorBody.appendChild(buttondiv);
-
-        handler();
+        $(document).on('click', '#button', function() {
+            chrome.tabs.create({url : "/allColors/allColors.html"});
+        })
+        handler();   
     }
    });
-

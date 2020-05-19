@@ -1,7 +1,7 @@
 window.paletteGenerator = {};
 chrome.runtime.onInstalled.addListener(function() 
 {
-   chrome.storage.local.clear();
+//    chrome.storage.local.clear();
    chrome.storage.local.get('userColors',function(result)
    {
     if(result.userColors == undefined)
