@@ -40,7 +40,20 @@ chrome.storage.local.get("userColors",function(result)
         console.log(index);
         updateColors.splice(index,1);
         $(this).parent().remove();
-        // parent.style.opacity=0.5;
         chrome.storage.local.set({userColors : updateColors});
     })
+    $(document).on({
+        mouseenter: function () {
+            var rgbColor = $(this).css("background-color");
+            var match = rgbvalues(rgbColor);
+            var hex = rgbToHex(Number(match[1]),Number(match[2]),Number(match[3]));
+            var hexcolor = document.createElement("p");
+            hexcolor.innerHTML = hex;
+            hexcolor.setAttribute("class","hexcolor");
+            $(this).append(hexcolor)
+        },
+        mouseleave: function () {
+             $(this).find("p").remove();
+        }
+    }, ".colors");
 })

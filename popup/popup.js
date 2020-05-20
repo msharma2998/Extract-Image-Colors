@@ -21,7 +21,7 @@ chrome.storage.local.get('userColors',function(result)
        image.setAttribute("src","/icons/popup-image.png");
        image.setAttribute("id","colorimg");
        var text = document.createElement("h3");
-       text.innerHTML = "OOPS! Nothing to show. Try saving some colors!";
+       text.innerHTML = "OOPS! I found no colors in the Gallery. Try saving some colors!";
        text.setAttribute("id","text");
        colorBody.appendChild(image);
        colorBody.appendChild(text);
