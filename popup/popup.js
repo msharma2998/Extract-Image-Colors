@@ -8,6 +8,10 @@ function handler()
         {
             chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
               console.log(response);
+              if(response == undefined)
+              {
+                    alert('Refresh the page and try again only after window gets loaded completely!');
+              }
             });
         });
     })

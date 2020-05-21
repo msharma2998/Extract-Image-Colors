@@ -102,7 +102,6 @@ function rgbToHex(r, g, b)
 {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
-
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
     if (request.text == "Activate")
@@ -132,12 +131,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
                         var id = $(this).attr("id");
                         port.postMessage({doWeStore : id});
                         var div1 = document.getElementById('mainDiv');
-                        var div2 = document.getElementById('modalDialogParentDiv')
-                        div1.parentNode.removeChild(div1);
+                        var div2 = document.getElementById('modalDialogParentDiv');
+                        document.body.removeChild(div1);
                         div2.parentNode.removeChild(div2);
                     });
                     sendResponse(response);
                 })
+                
             })
         }
     }
