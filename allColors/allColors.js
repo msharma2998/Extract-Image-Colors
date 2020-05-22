@@ -31,13 +31,9 @@ chrome.storage.local.get("userColors",function(result)
     $(document).on('click','.delete',function()
     {
         var rgbColor = $(this).siblings().css("background-color");
-        console.log(rgbColor);
         var match = rgbvalues(rgbColor);
-        console.log(match);
         var hex = rgbToHex(Number(match[1]),Number(match[2]),Number(match[3]));
-        console.log(hex);
         var index = updateColors.indexOf(hex);
-        console.log(index);
         updateColors.splice(index,1);
         $(this).parent().remove();
         chrome.storage.local.set({userColors : updateColors});

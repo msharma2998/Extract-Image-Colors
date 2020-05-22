@@ -6,18 +6,18 @@ function handler()
         var message ={text : "Activate"};
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) 
         {
-            chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
-              console.log(response);
-              if(response == undefined)
-              {
+            chrome.tabs.sendMessage(tabs[0].id, message, function(response) 
+            {
+                if(response == undefined)
+                {
                     alert('Refresh the page and try again only after window gets loaded completely!');
-              }
+                }
             });
         });
     })
 }
 chrome.storage.local.get('userColors',function(result)
-   {
+{
     var colorBody = document.getElementById("colorBody");
     if(result.userColors == undefined)
     {
@@ -79,4 +79,4 @@ chrome.storage.local.get('userColors',function(result)
         })
         handler();   
     }
-   });
+});

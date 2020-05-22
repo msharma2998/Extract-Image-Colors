@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name" : "Color Palette Extractor",
+    "name" : "Extract Image Colors",
     "version" : "1.0",
     "description" : "Extract the colors from an image and generate a palette.",
     "icons": 
@@ -17,7 +17,7 @@
           "24": "./icons/color-palette-icon-24.png",           
           "32": "./icons/color-palette-icon-32.png"            
         },
-        "default_title": "Color Palette Extractor",   
+        "default_title": "Extract Image Colors",   
         "default_popup": "./popup/popup.html"        
       },
       "author" : "Mansi Sharma",

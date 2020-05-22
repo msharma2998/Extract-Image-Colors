@@ -1,29 +1,25 @@
-window.paletteGenerator = {};
 chrome.runtime.onInstalled.addListener(function() 
 {
-//    chrome.storage.local.clear();
     chrome.storage.local.set({status : false});
-   chrome.storage.local.get('userColors',function(result)
-   {
-    if(result.userColors == undefined)
+    chrome.storage.local.get('userColors',function(result)
     {
-        console.log("Empty");
-        chrome.storage.local.clear();
-    }   
-   });
- 
+        if(result.userColors == undefined)
+        {
+            chrome.storage.local.clear();
+        }   
+    });
 })
 function rgbToHex(r, g, b) 
 {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
+
 chrome.runtime.onConnect.addListener(function(port) {
     if(port.name == "Content")
     {
         port.onMessage.addListener(function(request) 
         {
             var src = request.imgsrc;
-            console.log(src);
             //Load Color Thief Script
             $.getScript("background/color-thief-master/dist/color-thief.min.js",function()
             {
@@ -34,10 +30,8 @@ chrome.runtime.onConnect.addListener(function(port) {
                 {
                     var colorThief = new ColorThief();
                     var dominantColor = colorThief.getColor(img);
-                    console.log(dominantColor);
                     var paletteArray = colorThief.getPalette(img, 10);
-                    console.log(paletteArray);
-                    window.paletteGenerator =
+                    var paletteGenerator =
                     {
                         imgsrc : src,
                         color : dominantColor,

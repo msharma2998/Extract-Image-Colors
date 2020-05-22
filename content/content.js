@@ -105,59 +105,51 @@ function rgbToHex(r, g, b)
 
 function compute(event)
 {
-    console.log(event.target.src)
     chrome.storage.local.get('status',function(response)
     {
         var status = response.status;
         if(status == true)
         {
             var source = event.target.src;
-            console.log(source);
-                var port = chrome.runtime.connect({name: "Content"});
-                port.postMessage({imgsrc : source});
-                port.onMessage.addListener(function(response)
+            var port = chrome.runtime.connect({name: "Content"});
+            port.postMessage({imgsrc : source});
+            port.onMessage.addListener(function(response)
+            {
+                var hexarray=[];
+                var hexdominantcolor = rgbToHex(response.color[0],response.color[1],response.color[2]);
+                for(var i=0;i<10;i++)
                 {
-                    console.log(response);
-                    var hexarray=[];
-                    var hexdominantcolor = rgbToHex(response.color[0],response.color[1],response.color[2]);
-                    for(var i=0;i<10;i++)
-                    {
-                        hexarray.push(rgbToHex(response.paletteColors[i][0],response.paletteColors[i][1],response.paletteColors[i][2]));
-                    }
-                    console.log(hexarray);
-                    resultpopup(response.imgsrc,hexdominantcolor,hexarray);
-                    $(document).on('click', '.Button', function() {
-                        var id = $(this).attr("id");
-                        port.postMessage({doWeStore : id});
-                        var div1 = document.getElementById('mainDiv');
-                        var div2 = document.getElementById('modalDialogParentDiv');
-                        document.body.removeChild(div1);
-                        div2.parentNode.removeChild(div2);
-                        chrome.storage.local.set({status : false});
-                    });
+                    hexarray.push(rgbToHex(response.paletteColors[i][0],response.paletteColors[i][1],response.paletteColors[i][2]));
+                }
+                resultpopup(response.imgsrc,hexdominantcolor,hexarray);
+                $(document).on('click', '.Button', function() 
+                {
+                    var id = $(this).attr("id");
+                    port.postMessage({doWeStore : id});
+                    var div1 = document.getElementById('mainDiv');
+                    var div2 = document.getElementById('modalDialogParentDiv');
+                    document.body.removeChild(div1);
+                    div2.parentNode.removeChild(div2);
+                    chrome.storage.local.set({status : false});
                 });
+            });
         }
-        else if(status == false)
-        {
-            console.log("removed");
-        }
-    })
+    });
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
     if (request.text == "Activate")
     {
-        console.log("Are we done yet");
         chrome.storage.local.set({status : true});
         sendResponse({response : 'Done'});
     }
     return true;
 });
 
-chrome.storage.onChanged.addListener(function(changes){
-    //make sure it was the score that has been changed.
-    console.log(changes['status'].newValue);
+chrome.storage.onChanged.addListener(function(changes)
+{
+    //make sure it was the score that has been changed.    
     const newValue = changes['status'].newValue;
     if(newValue == true)
     {
