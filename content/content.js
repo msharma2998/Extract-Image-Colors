@@ -102,18 +102,17 @@ function rgbToHex(r, g, b)
 {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
+
+function compute(event)
 {
-    if (request.text == "Activate")
+    console.log(event.target.src)
+    chrome.storage.local.get('status',function(response)
     {
-        console.log("Are we done yet");
-        var imgs = document.getElementsByTagName("img");
-        for(var i = 0; i < imgs.length; ++i) 
+        var status = response.status;
+        if(status == true)
         {
-            imgs[i].addEventListener("click", function() 
-            {
-                var source = this.src;
-                console.log(source);
+            var source = event.target.src;
+            console.log(source);
                 var port = chrome.runtime.connect({name: "Content"});
                 port.postMessage({imgsrc : source});
                 port.onMessage.addListener(function(response)
@@ -134,12 +133,46 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
                         var div2 = document.getElementById('modalDialogParentDiv');
                         document.body.removeChild(div1);
                         div2.parentNode.removeChild(div2);
+                        chrome.storage.local.set({status : false});
                     });
-                    sendResponse(response);
-                })
-                
-            })
+                });
         }
+        else if(status == false)
+        {
+            console.log("removed");
+        }
+    })
+}
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) 
+{
+    if (request.text == "Activate")
+    {
+        console.log("Are we done yet");
+        chrome.storage.local.set({status : true});
+        sendResponse({response : 'Done'});
     }
     return true;
 });
+
+chrome.storage.onChanged.addListener(function(changes){
+    //make sure it was the score that has been changed.
+    console.log(changes['status'].newValue);
+    const newValue = changes['status'].newValue;
+    if(newValue == true)
+    {
+        var imgs = document.getElementsByTagName("img");
+        for(var i = 0; i < imgs.length; ++i) 
+        {
+            imgs[i].addEventListener("click", compute);
+        }
+    }
+    else if(newValue == false)
+    {
+        var imgs = document.getElementsByTagName("img");
+        for(var i = 0; i < imgs.length; ++i) 
+        {
+            imgs[i].removeEventListener("click", compute);
+        }
+    }
+})
